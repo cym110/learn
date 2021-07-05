@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <input type="text" id="a">
+    <span id="b"></span>
+    <!-- <input type="text" v-model="text">
+    {{ text }} -->
+</div>
+<script type="text/javascript">
+  //数据劫持函数
+  var obj = {}
+  var val = 'hello'
+  obj.val = ''
+
+  Object.defineProperty(obj,'hello',{
+    get: function(){
+      return val
+      console.log(val)
+    },
+    set: function(newval){
+      val = newval
+      console.log(document.getElementById('b'))
+      document.getElementById('a').value = val
+      document.getElementById('b').innerHTML = val
+    }
+  })
+  document.addEventListener('keyup',function(e){
+    obj.hello = e.target.value 
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <div>A{{msg}}</div>
+    <my-button v-on:confirm="doSomething" placeholder="ddddd" :msg="msg"></my-button>
+  </div>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      components: {
+        'MyButton': {
+          // props: ['msg'],
+          template: `<div>B<my-input v-bind="$attrs" v-on="$listeners"></my-input></div>`,
+          components: {
+            'MyInput':{
+              props: ['msg'],
+              template: `<div>
+                C{{msg}}
+                <input v-bind="$attrs" v-on="$listeners"/>
+                </div>`,
+              data(){
+                return {
+                  value: '今晚打老虎'
+                }
+              },
+              mounted(){
+                console.log(this.$el.textContent)
+              },
+              created(){
+                console.log(this.$attrs)
+                this.$listeners.confirm(this.value)
+              }
+            }
+          }
+        }
+      },
+      data: {
+        msg: '今晚打老虎'
+      },
+      methods: {
+        doSomething(value){
+          console.log(value)
+        }
+      }
+    })
+  </script>
+</body>
+</html>
