@@ -16,10 +16,12 @@
     var app = new Vue({
       el: '#app',
       components: {
+        // 子组件
         'MyButton': {
           // props: ['msg'],
           template: `<div>B<my-input v-bind="$attrs" v-on="$listeners"></my-input></div>`,
           components: {
+            // 孙组件
             'MyInput':{
               props: ['msg'],
               template: `<div>

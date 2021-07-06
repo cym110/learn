@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input id="input" type="text">
+  <button id="btn">确定</button>
+  <script>
+    // 防抖
+    var debonce = (func, wait, immediate) => {
+      var timer
+      return function(){
+        var that = this
+        var args = [...arguments]
+        if (timer) clearTimeout(timer)
+        if(immediate) {
+          var canRun = !timer
+          timer = setTimeout(()=>{
+            timer = null
+          },wait)
+          if(canRun) func.apply(that, args)
+        }else {
+          timer = setTimeout(() => {
+            func.apply(that, args)
+          }, wait)
+        } 
+      }
+    }
+    // 节流
+    function throttle(func, wait){
+      //时间戳
+      /* var pre = 0
+      return function(){
+        var that = this
+        var args = [...arguments]
+        var now = Date.now()
+        if(now - pre > wait) {
+          func.apply(that, args)
+          pre = now
+        }
+      }*/
+      // 定时器版本
+      var timer
+      return function(){
+        var that = this
+        var args = [...arguments]
+        console.log(args,12121)
+        if(!timer) {
+          timer = setTimeout(()=>{
+            timer = null
+            func.apply(that, args)
+          },wait)
+        }
+      }
+    }
+    var inp = document.getElementById('input')
+    var btn = document.getElementById('btn')
+    function ck(){
+      console.log('value')
+    } 
+    function input(value){
+      console.log(inp.value)
+    }
+    btn.onclick = debonce(ck,1000,false)
+    inp.oninput = throttle(input,1000)
+  </script>
+</body>
+</html>

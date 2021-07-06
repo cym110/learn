@@ -49,4 +49,4 @@ class LazyManClass{
 let lazyMan = function(name){
   return new LazyManClass(name)
 } 
-lazyMan('LL').eat('dinner').sleepFirst(10000).sleep(10000).eat('lunch').sleep(5000).eat('breakFirst')
+lazyMan('LL').eat('breakFirst').sleepFirst(10000).sleep(10000).eat('lunch').sleep(5000).eat('dinner')

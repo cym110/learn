@@ -51,7 +51,7 @@ function newBind(_this){
     //2. 如果是使用new调用，忽略bind函数的this，执行构造函数new的this
     return that.apply(this instanceof that ? this : _this,args.concat(_args))
   }
-  //返回的函数原型指向原函数的
+  //返回的函数原型指向原函数的空实例
   F.prototype = Object.create(that.prototype)
   return F
 }
